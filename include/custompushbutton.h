@@ -68,7 +68,6 @@ signals:
 private slots:
     void mousePressEvent(QMouseEvent *mouseEvent)
     {
-        this->setCustomChecked(this->m_state);
         if (mouseEvent->button() == Qt::MouseButton::LeftButton) {
             if (this->rect().contains(mouseEvent->pos())) {
                 emit(leftClicked(this));

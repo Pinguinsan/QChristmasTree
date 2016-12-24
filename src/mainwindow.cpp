@@ -37,6 +37,11 @@ MainWindow::MainWindow(QWidget *parent) :
     this->m_numberedButtons.push_back(this->m_uiPtr->fourthTierPushButton);
     this->m_numberedButtons.push_back(this->m_uiPtr->fifthTierPushButton);
 
+    for (auto &it : this->m_numberedButtons) {
+        it->setState(false);
+        it->setChecked(false);
+    }
+
     for (int i = 0; i < 1; i++) {
         std::string stringToSend{static_cast<std::string>(MainWindow::DWRITEALL_BASE_STRING) + "0}"};
         this->sendUDPDatagramsHandoff(static_cast<std::string>(MainWindow::CLIENT_HOST_NAME),
@@ -77,6 +82,7 @@ void MainWindow::updateFutureHandles()
 void MainWindow::onTieredButtonClicked(CustomPushButton *button)
 {
     button->flipState();
+    button->setChecked(button->state());
     for (int i = 0; i < 1; i++) {
         std::string stringToSend{static_cast<std::string>(MainWindow::DWRITE_BASE_STRING)
                                  + std::to_string(button->number())
